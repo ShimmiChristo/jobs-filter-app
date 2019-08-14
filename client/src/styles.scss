@@ -1,0 +1,38 @@
+#nav {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  
+  .nav-title {
+    width: 25%;
+  }
+  .nav-date {
+    width: 15%;
+  }
+  .nav-description {
+    width: 50%;
+
+  }
+
+}
+.cl-listing {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 30px;
+    box-sizing: border-box;
+
+  .cl-title {
+    width: 25%;
+  }
+  .cl-date {
+    width: 15%;
+  }
+  .cl-description {
+    width: 50%;
+  }
+}
