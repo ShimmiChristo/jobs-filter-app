@@ -9,7 +9,7 @@ class Search extends Component {
       query: '',
       jobs: [],
       descending: false,
-      keywords: ['react', 'node']
+      keywords: ['react']
     }
   }
 
@@ -35,18 +35,18 @@ class Search extends Component {
 
   filterKeyWords = () => {
     const { keywords, jobs } = this.state;
-    // const lowerCaseQuery = filter[0].toLowerCase();
     const filteredWords = jobs.filter(job => {
-      return job.some(keyword => keywords.includes(keyword))
+      // return Object.keys(job).some(keyword => 
+      //   job[keyword].includes(keywords)
+      // );
+      return Object.keys(job).some(keyword => 
+        keywords.indexOf(job[keyword] !== -1)
+      );
     })
     console.log(filteredWords);
-    // const filteredWords = jobs.filter(job => {
-    //   return job.map.some(keyword =>
-    //     job[keyword].toLowerCase().includes(lowerCaseQuery))
+    // this.setState({
+      // jobs: filteredWords
     // })
-    jobs.filter(job => {
-      console.log(job)
-    })
   }
 
   handleSearch = () => {
