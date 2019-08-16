@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Suggestions from './CraigslistJobs'
+import Keywords from './Filter'
 
 class Search extends Component {
   constructor(props) {
@@ -7,7 +8,8 @@ class Search extends Component {
     this.state = {
       query: '',
       jobs: [],
-      descending: false
+      descending: false,
+      keywords: ['react', 'node']
     }
   }
 
@@ -31,6 +33,22 @@ class Search extends Component {
     })
   }
 
+  filterKeyWords = () => {
+    const { keywords, jobs } = this.state;
+    // const lowerCaseQuery = filter[0].toLowerCase();
+    const filteredWords = jobs.filter(job => {
+      return job.some(keyword => keywords.includes(keyword))
+    })
+    console.log(filteredWords);
+    // const filteredWords = jobs.filter(job => {
+    //   return job.map.some(keyword =>
+    //     job[keyword].toLowerCase().includes(lowerCaseQuery))
+    // })
+    jobs.filter(job => {
+      console.log(job)
+    })
+  }
+
   handleSearch = () => {
     this.setState({
       query: this.search.value
@@ -46,19 +64,22 @@ class Search extends Component {
     })
   }
 
+ 
+
   compare = (e) => {
       const descendingStatus = this.state.descending;
       const jobItems = [...this.state.jobs].sort((a,b) =>  {
-        if(a.date > b.date) return 1;
-        if(a.date < b.date) return -1;
-        return 0;
+        let compare = 0;
+        if(a.date > b.date) compare = 1;
+        if(a.date < b.date) compare = -1;
+          return (
+            e.target.classList.contains('descending') ? compare * -1 : compare
+          );
       });
 
-    e.target.classList.contains('descending') ? console.log('yes') : console.log('no')
-      
     this.setState({ 
-      jobs: jobItems,
-      descending: !descendingStatus
+      descending: !descendingStatus,
+      jobs: jobItems
     })
   }
  
@@ -66,12 +87,13 @@ class Search extends Component {
     return (
       <form>
         <input type="text" id='Search' ref={input => this.search = input} onChange={this.handleSearch} placeholder='Search...'/>
+        <Keywords keywords={this.state.keywords} />
+        <div onClick={this.filterKeyWords}>Filter Keywords</div>
         <div id="nav">
           <div className="nav-title">Title</div>
-          <div className={`new-date${this.state.descending ? ' descending' : ''}`} onClick={ this.compare(e) }>Date</div>
+          <div className={`new-date${this.state.descending ? ' descending' : ''}`} onClick={ this.compare.bind(this) }>Date</div>
           <div className="nav-description">Description</div>
         </div>
-        {/* <p>{this.state.query}</p> */}
         <Suggestions jobs={this.state.jobs} /> 
       </form>
     )
