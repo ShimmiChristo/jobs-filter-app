@@ -9,7 +9,8 @@ class Search extends Component {
       query: '',
       jobs: [],
       descending: false,
-      keywords: ['react']
+      keywords: ['react'],
+      newJobs: ['this is about react', 'this is not', 'this has the web']
     }
   }
 
@@ -19,6 +20,31 @@ class Search extends Component {
       .then(data => this.setState({ jobs: data }));
   }
 
+  
+  filterKeyWords = () => {
+    const { keywords, jobs, newJobs } = this.state;
+    
+    const filteredWords = jobs.filter(job => {
+      return Object.keys(job).some(node => 
+        job[node].includes(keywords)
+      // job[node].match(new RegExp(node, "i"))
+    )});
+
+
+    // const filteredWords = jobs.filter(job => {
+    //   // return Object.keys(job).some(keyword => 
+    //   //   job[keyword].includes(keywords)
+    //   // );
+    //   return Object.keys(job).some(keyword => 
+    //     keywords.indexOf(job[keyword] !== -1)
+    //     );
+    //   })
+    console.log(filteredWords);
+    // this.setState({
+      // jobs: filteredWords
+      // })
+  }
+  
   filterArray() {
     const {jobs, query} = this.state;
     
@@ -31,22 +57,6 @@ class Search extends Component {
     this.setState({
       jobs: filteredJobs
     })
-  }
-
-  filterKeyWords = () => {
-    const { keywords, jobs } = this.state;
-    const filteredWords = jobs.filter(job => {
-      // return Object.keys(job).some(keyword => 
-      //   job[keyword].includes(keywords)
-      // );
-      return Object.keys(job).some(keyword => 
-        keywords.indexOf(job[keyword] !== -1)
-      );
-    })
-    console.log(filteredWords);
-    // this.setState({
-      // jobs: filteredWords
-    // })
   }
 
   handleSearch = () => {
