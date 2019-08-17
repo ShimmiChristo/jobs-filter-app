@@ -9,8 +9,7 @@ class Search extends Component {
       query: '',
       jobs: [],
       descending: false,
-      keywords: ['react'],
-      newJobs: ['this is about react', 'this is not', 'this has the web']
+      keywords: []
     }
   }
 
@@ -19,38 +18,32 @@ class Search extends Component {
       .then(res => res.json())
       .then(data => this.setState({ jobs: data }));
   }
-
   
-  filterKeyWords = () => {
-    const { keywords, jobs, newJobs } = this.state;
-    
-    const filteredWords = jobs.filter(job => {
-      return Object.keys(job).some(node => 
-        job[node].includes(keywords)
-      // job[node].match(new RegExp(node, "i"))
-    )});
+  handleSubmit = (e) => {
+    const { keywords, jobs } = this.state;
+    e.preventDefault();
+    // this.setState({keywords: [...keywords, search]})
 
-
-    // const filteredWords = jobs.filter(job => {
-    //   // return Object.keys(job).some(keyword => 
-    //   //   job[keyword].includes(keywords)
-    //   // );
-    //   return Object.keys(job).some(keyword => 
-    //     keywords.indexOf(job[keyword] !== -1)
-    //     );
-    //   })
-    console.log(filteredWords);
-    // this.setState({
-      // jobs: filteredWords
-      // })
+    let filterWords = jobs.filter(val => {
+      for(let i=0; i < keywords.length; i++) {
+        if (
+          Object.keys(val).some(key =>
+            val[key].indexOf(keywords[i]) !== -1)
+        )
+          return val;
+      }
+    })
+    this.setState({
+      keywords: [...keywords, this.search.value],
+      jobs: filterWords
+    })
+    this.search.value = "";
   }
   
   filterArray() {
     const {jobs, query} = this.state;
-    
     const lowerCaseQuery = query.toLowerCase();
     const filteredJobs = jobs.filter(job => {
-    // jobs.filter(job => {
       return Object.keys(job).some(key => 
         job[key].toLowerCase().includes(lowerCaseQuery)) || !lowerCaseQuery
     })
@@ -96,9 +89,9 @@ class Search extends Component {
   render() {
     return (
       <form>
-        <input type="text" id='Search' ref={input => this.search = input} onChange={this.handleSearch} placeholder='Search...'/>
+        <input type="text" id='Search' ref={input => this.search = input}  placeholder='Search...'/>
+        <button type="button" id="submit" onClick={this.handleSubmit}> Submit </button>
         <Keywords keywords={this.state.keywords} />
-        <div onClick={this.filterKeyWords}>Filter Keywords</div>
         <div id="nav">
           <div className="nav-title">Title</div>
           <div className={`new-date${this.state.descending ? ' descending' : ''}`} onClick={ this.compare.bind(this) }>Date</div>

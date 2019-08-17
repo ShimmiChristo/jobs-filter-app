@@ -4,9 +4,9 @@ const uuidv4 = require('uuid/v4');
 
 const Keywords = (props) => {
   const options = props.keywords.map(keyword => (
-    <ul key={uuidv4()}>
-      <li>{keyword}</li>
-    </ul>
+    <li key={uuidv4()}>
+      {keyword}
+    </li>
   ))
   return <div>{ options }</div>
 }
