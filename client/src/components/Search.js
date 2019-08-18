@@ -19,11 +19,8 @@ class Search extends Component {
       .then(data => this.setState({ jobs: data }));
   }
   
-  handleSubmit = (e) => {
+  filterSubmit = () => {
     const { keywords, jobs } = this.state;
-    e.preventDefault();
-    // this.setState({keywords: [...keywords, search]})
-
     let filterWords = jobs.filter(val => {
       for(let i=0; i < keywords.length; i++) {
         if (
@@ -34,10 +31,22 @@ class Search extends Component {
       }
     })
     this.setState({
-      keywords: [...keywords, this.search.value],
       jobs: filterWords
     })
-    this.search.value = "";
+  }
+
+  handleSubmit = (e) => {
+    const { keywords } = this.state;
+    e.preventDefault();
+    if (this.search.value.length >= 1 ) {
+      this.setState(
+        {
+          keywords: [...keywords, this.search.value]
+        }, () => {
+          this.filterSubmit();
+        })
+      this.search.value = "";
+    } 
   }
   
   filterArray() {
