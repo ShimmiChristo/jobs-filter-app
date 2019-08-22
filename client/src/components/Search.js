@@ -103,8 +103,10 @@ class Search extends Component {
         <Keywords keywords={this.state.keywords} />
         <div id="nav">
           <div className="nav-title">Title</div>
-          <div className={`new-date${this.state.descending ? ' descending' : ''}`} onClick={ this.compare.bind(this) }>Date</div>
+          <div className={`nav-date${this.state.descending ? ' descending' : ''}`} onClick={ this.compare.bind(this) }>Date</div>
           <div className="nav-description">Description</div>
+          <div className="nav-link">Link</div>
+          <div className="nav-platform">Platform</div>
         </div>
         <Suggestions jobs={this.state.jobs} /> 
       </form>

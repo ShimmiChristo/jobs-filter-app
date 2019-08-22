@@ -13,8 +13,13 @@
     width: 15%;
   }
   .nav-description {
-    width: 50%;
-
+    width: 40%;
+  }
+  .nav-link {
+    width: 10%
+  }
+  .nav-platform {
+    width: 10%;
   }
 
 }
@@ -28,11 +33,21 @@
 
   .cl-title {
     width: 25%;
+    padding-right: 30px;
+    box-sizing: border-box;
   }
   .cl-date {
     width: 15%;
   }
   .cl-description {
-    width: 50%;
+    width: 40%;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
+  .cl-link {
+    width: 10%;
+  }
+  .cl-platform {
+    width: 10%;
   }
 }

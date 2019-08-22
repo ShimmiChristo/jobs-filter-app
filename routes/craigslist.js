@@ -4,8 +4,6 @@ const cors = require('cors');
 let Parser = require('rss-parser');
 const $ = require('cheerio'); // jquery for node
 const rp = require('request-promise');
-// const puppeteer = require('puppeteer');
-// const select = require ('puppeteer-select');
 
 let parser = new Parser();
 const url = 'https://newyork.craigslist.org/search/jjj?format=rss&query=web%20development';
@@ -21,7 +19,8 @@ const getCraigslistJobs = function() {
           'title': item.title,
           'link': item.link,
           'description': item.content,
-          'date': item.date
+          'date': item.date,
+          'platform': 'Craigslist'
         });
       })
     })

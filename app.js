@@ -1,9 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
 const path = require('path');
-// const fs = require('fs');
 
 
 var indexRouter = require('./routes/index');
@@ -12,7 +9,6 @@ var craigslistRouter = require('./routes/craigslist');
 var app = express();
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
