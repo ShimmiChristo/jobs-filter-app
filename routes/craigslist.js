@@ -6,13 +6,14 @@ const $ = require('cheerio'); // jquery for node
 const rp = require('request-promise');
 
 let parser = new Parser();
-const url = 'https://newyork.craigslist.org/search/jjj?format=rss&query=web%20development';
+const clURL = 'https://newyork.craigslist.org/search/jjj?format=rss&query=web%20development';
+// const indeedURL = 'http://api.indeed.com'
 
 
 const craigslistJobs = [];
 
 const getCraigslistJobs = function() {
-  return parser.parseURL(url)
+  return parser.parseURL(clURL)
     .then(function(html){
       html.items.forEach(item => {
         craigslistJobs.push({
