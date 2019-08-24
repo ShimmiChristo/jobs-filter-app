@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Search from './components/Search';
 import Listings from './components/Listings';
 import  "./styles.scss"
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,8 +24,11 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Search />
-        <Listings jobs={ this.state.jobs } />
+        {/* <Search /> */}
+        <div className="cl-jobs">
+          <Listings jobs={ this.state.jobs } />
+        </div>
+
       </div>
     );
   }

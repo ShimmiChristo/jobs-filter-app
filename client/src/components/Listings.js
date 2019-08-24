@@ -1,25 +1,24 @@
-import React from 'react';
-import '../App.css';
+import React, { Component } from 'react';
+import './Listings.css';
 import '../App.js';
+import ListingItem from './ListingItem';
+import PropTypes from 'prop-types';
+
 const uuidv4 = require('uuid/v4');
 
-export default class Listings extends React.Component {
-
-    const options = props.jobs.map(r => (
-      <div className='cl-listing' key={uuidv4()}>
-        <div className='cl-title'>{r.title}</div>  
-        <br></br> 
-        <div className='cl-date'>{r.date}</div>  
-        <br></br> 
-        <div className="cl-description">{r.description}</div> 
-        <div className="cl-link"><a href={r.link}>Link</a></div> 
-        <div className="cl-platform">{r.platform}</div> 
-      </div>
-    ))
-      return <div className="cl-jobs">{options}</div>
-    );
+class Listings extends Component {
+    render() {
+      return (
+        this.props.jobs.map(job => (
+          <ListingItem  key={uuidv4()} job={job}/>
+        ))
+      );
+    }
 }
 
-
+// PropTypes
+Listings.propTypes = {
+  jobs: PropTypes.array.isRequired
+}
 
 export default Listings;
