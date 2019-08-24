@@ -12,7 +12,7 @@ export class ListingItem extends Component {
             <div className="cl-description">{this.props.job.description}</div> 
             <div className="cl-link"><a href={this.props.job.link}>Link</a></div> 
             <div className="cl-platform">{this.props.job.platform}</div> 
-          </div>
+        </div>
     )
   }
 }
