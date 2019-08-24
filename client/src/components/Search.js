@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Suggestions from './CraigslistJobs'
+import CraigslistJobs from './CraigslistJobs'
 import Keywords from './Filter'
 
 class Search extends Component {
@@ -108,7 +108,7 @@ class Search extends Component {
           <div className="nav-link">Link</div>
           <div className="nav-platform">Platform</div>
         </div>
-        <Suggestions jobs={this.state.jobs} /> 
+        <CraigslistJobs jobs={this.state.jobs} /> 
       </form>
     )
   }
