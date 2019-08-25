@@ -14,8 +14,7 @@ class App extends Component {
       jobs: [],
       descending: false,
       keywords: ['javascript', 'react', 'node', 'web'],
-      filterKeywords: [],
-      complete: false
+      filterKeywords: []
     }
   }
 
@@ -61,8 +60,21 @@ class App extends Component {
     this.setState(
       filter(this.state, e),
       () => {
-        console.log(this.state.filterKeywords)
-      })
+        const { filterKeywords, jobs } = this.state;
+        console.log(filterKeywords);
+        let filterWords = jobs.filter(val => {
+          for(let i=0; i < filterKeywords.length; i++) {
+            if (
+              Object.keys(val).some(key =>
+                val[key].indexOf(filterKeywords[i]) !== -1)
+            )
+              return val;
+          }
+        })
+        this.setState({
+          jobs: filterWords
+        })
+    })
   }
 
   render () {
@@ -70,7 +82,11 @@ class App extends Component {
       <div>
         <div className="filter-section">
           {/* <Search /> */}
-          <Filter keywords={ this.state.keywords } complete={this.complete} jobs={ this.state.jobs } checkHandler={ this.handleCheck }/>
+          <Filter 
+            keywords={ this.state.keywords } 
+            jobs={ this.state.jobs } 
+            checkHandler={ this.handleCheck }
+          />
         </div>
         <div className="cl-jobs">
           <Listings jobs={ this.state.jobs } />
